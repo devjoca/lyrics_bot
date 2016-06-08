@@ -12,7 +12,7 @@ class ResponseController extends AbstractTelegramController
 
         return $this->telegram->sendMessage([
           'chat_id' => $chat->getId(),
-          'text' => 'Hola bb'
+          'text' => 'hola bb'
         ]);
     }
 }
