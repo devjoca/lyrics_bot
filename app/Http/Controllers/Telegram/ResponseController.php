@@ -10,6 +10,7 @@ class ResponseController extends AbstractTelegramController
 
     public function __construct()
     {
+        parent::__construct();
         $this->musicxmatch = new MusicxmatchProvider();
     }
 
