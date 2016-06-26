@@ -32,6 +32,5 @@ class MusicxmatchProvider
         $query = http_build_query(['q_track' => $search_text, 'f_has_lyrics'=> 1, 'apikey' => env('MUSICXMATCH_TOKEN')]);
 
         return "{$this->api_url}/track.search?{$query}";
-
     }
 }
