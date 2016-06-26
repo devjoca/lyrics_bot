@@ -27,9 +27,11 @@ class ResponseController extends AbstractTelegramController
             $m = "{$m} {$t['track']['track_name']} - {$t['track']['artist_name']}".PHP_EOL;
         }
 
-        return $this->telegram->sendMessage([
-          'chat_id' => $chat->getId(),
-          'text' => $m,
-        ]);
+        return $this->telegram
+            ->setAsyncRequest(true)
+            ->sendMessage([
+                'chat_id' => $chat->getId(),
+                'text' => $m,
+            ]);
     }
 }
