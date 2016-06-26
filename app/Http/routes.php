@@ -17,4 +17,3 @@ $app->get('/clean-webhook', function () {
 
 });
 $app->post('/webhook', 'Telegram\ResponseController@create');
-
