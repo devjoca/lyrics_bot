@@ -19,8 +19,9 @@ class ResponseController extends AbstractTelegramController
         $update = $this->telegram->getWebhookUpdates();
         $message = $update->getMessage();
         $chat = $message->getChat();
+        $text = $message->getText();
 
-        $r = $this->musicxmatch->find('Adult Diversion');
+        $r = $this->musicxmatch->find($text);
         $m = '';
         foreach($r['message']['body']['track_list'] as $t) {
             $m = "{$m} {$t['track']['track_name']} - {$t['track']['artist_name']}".PHP_EOL;
