@@ -35,17 +35,16 @@ class ResponseController extends AbstractTelegramController
         $message = [
             'chat_id' => $chat->getId(),
             'text' => "There are {$tracks->count()} results.`",
+            'reply_markup' = $this->prepareReplyMarkup($tracks),
         ];
-
-        if(! $tracks->isEmpty()) {
-            $message['reply_markup'] = $this->prepareReplyMarkup($tracks);
-        }
 
         return $message;
     }
 
     protected function prepareReplyMarkup($tracks)
     {
+        if ($tracks->isEmpty()) return $telegram->replyKeyboardHide();
+
         $keyboard = $tracks->take(3)->map(function ($track) {
             return [$track['track_name'].' - '.$track['artist_name']];
         });
