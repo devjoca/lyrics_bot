@@ -21,6 +21,8 @@ class ResponseController extends AbstractTelegramController
         $chat = $message->getChat();
         $text = $message->getText();
 
+        $this->telegram->setAsyncRequest(true)->sendMessage("Message was: ".$text);
+
         $tracks = $this->musicxmatch->find($text);
 
         $message = $this->prepareMessage($chat, $tracks);
