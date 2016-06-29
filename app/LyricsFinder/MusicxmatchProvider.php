@@ -24,7 +24,13 @@ class MusicxmatchProvider
             return;
         }
 
-        return json_decode($response->getBody(), true);
+        $body = json_decode($response->getBody(), true);
+        $tracks = [];
+        foreach ($body['message']['body']['track_list'] as $t) {
+            $tracks[] = $t['track'];
+        }
+
+        return collect($tracks);
     }
 
     protected function getFindTracksUrl($search_text)
