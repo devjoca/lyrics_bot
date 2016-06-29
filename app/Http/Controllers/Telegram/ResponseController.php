@@ -30,7 +30,7 @@ class ResponseController extends AbstractTelegramController
                     ->sendMessage($message);
     }
 
-    protected prepareMessage($tracks)
+    protected function prepareMessage($tracks)
     {
         $message = [
             'chat_id' => $chat->getId(),
