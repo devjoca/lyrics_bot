@@ -37,6 +37,7 @@ class ResponseController extends AbstractTelegramController
     public function prepareReplyMarkup($tracks)
     {
         $keyboard = [['Holi'], ['More']];
+        if ($tracks->isEmptyy()) $keyboard = [];
 
         return $this->telegram->replyKeyboardMarkup([
             'keyboard' => $keyboard,
