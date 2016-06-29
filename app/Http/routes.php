@@ -15,7 +15,12 @@ $app->get('/', 'Telegram\BotInfoController@index');
 $app->get('/set-webhook', 'Telegram\WebhookController@create');
 $app->get('/test', function () {
     $musicxmatch = new App\LyricsFinder\MusicxmatchProvider;
-    $tracks = $musicxmatch->find('adult diversion');
-    return $tracks;
+    $tracks = $musicxmatch->find('adult');
+
+    $keyboard = $tracks->take(3)->map(function ($track) {
+        return [$track['track_name'].' - '.$track['artist_name']];
+    });
+
+    return $keyboard;
 });
 $app->post('/webhook', 'Telegram\ResponseController@create');
