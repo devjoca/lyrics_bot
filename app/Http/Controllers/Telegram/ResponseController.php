@@ -23,14 +23,14 @@ class ResponseController extends AbstractTelegramController
 
         $tracks = $this->musicxmatch->find($text);
 
-        $message = $this->prepareMessage($tracks);
+        $message = $this->prepareMessage($chat, $tracks);
 
         return $this->telegram
                     ->setAsyncRequest(true)
                     ->sendMessage($message);
     }
 
-    protected function prepareMessage($tracks)
+    protected function prepareMessage($chat, $tracks)
     {
         $message = [
             'chat_id' => $chat->getId(),
