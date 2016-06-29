@@ -35,7 +35,7 @@ class ResponseController extends AbstractTelegramController
         $message = [
             'chat_id' => $chat->getId(),
             'text' => "There are {$tracks->count()} results.`",
-            'reply_markup' = $this->prepareReplyMarkup($tracks),
+            'reply_markup' => $this->prepareReplyMarkup($tracks),
         ];
 
         return $message;
