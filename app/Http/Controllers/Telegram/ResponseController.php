@@ -21,17 +21,13 @@ class ResponseController extends AbstractTelegramController
         $chat = $message->getChat();
         $text = $message->getText();
 
-        $r = $this->musicxmatch->find($text);
-        $m = '';
-        foreach($r['message']['body']['track_list'] as $t) {
-            $m = "{$m} {$t['track']['track_name']} - {$t['track']['artist_name']}".PHP_EOL;
-        }
+        $tracks = $this->musicxmatch->find($text);
 
         return $this->telegram
             ->setAsyncRequest(true)
             ->sendMessage([
                 'chat_id' => $chat->getId(),
-                'text' => $m,
+                'text' => "There are {$tracks->count()} results.",
             ]);
     }
 }

@@ -13,7 +13,9 @@
 
 $app->get('/', 'Telegram\BotInfoController@index');
 $app->get('/set-webhook', 'Telegram\WebhookController@create');
-$app->get('/clean-webhook', function () {
-
+$app->get('/test', function () {
+    $musicxmatch = new App\LyricsFinder\MusicxmatchProvider;
+    $tracks = $musicxmatch->find('adult diversion');
+    return $tracks;
 });
 $app->post('/webhook', 'Telegram\ResponseController@create');
