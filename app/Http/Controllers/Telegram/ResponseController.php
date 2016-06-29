@@ -23,11 +23,25 @@ class ResponseController extends AbstractTelegramController
 
         $tracks = $this->musicxmatch->find($text);
 
+        $reply_markup = $this->prepareReplyMarkup($tracks);
+
         return $this->telegram
             ->setAsyncRequest(true)
             ->sendMessage([
                 'chat_id' => $chat->getId(),
-                'text' => "There are {$tracks->count()} results.",
+                'text' => "There are {$tracks->count()} results.`",
+                'reply_markup' => $reply_markup,
             ]);
+    }
+
+    public function prepareReplyMarkup($tracks)
+    {
+        $keyboard = ['Holi', 'More'];
+
+        return $this->telegram->replyKeyboardMarkup([
+            'keyboard' => $keyboard,
+            'resize_keyboard' => true,
+            'one_time_keyboard' => true
+        ]);
     }
 }
