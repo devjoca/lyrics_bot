@@ -51,7 +51,7 @@ class ResponseController extends AbstractTelegramController
         if ($tracks->isEmpty()) return $this->telegram->replyKeyboardHide();
 
         $keyboard = $tracks->take(3)->map(function ($track) {
-            return ['#'.$track['track_id'].' - '.$track['track_name'].' - '.$track['artist_name']];
+            return ['id:'.$track['track_id'].' - '.$track['track_name'].' - '.$track['artist_name']];
         });
 
         return $this->telegram->replyKeyboardMarkup([
