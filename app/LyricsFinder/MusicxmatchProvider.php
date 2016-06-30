@@ -35,7 +35,7 @@ class MusicxmatchProvider
 
     protected function getFindTracksUrl($search_text)
     {
-        $query = http_build_query(['q_track' => $search_text, 'f_has_lyrics'=> 1, 'apikey' => env('MUSICXMATCH_TOKEN')]);
+        $query = http_build_query(['q_track' => $search_text, 'f_has_lyrics'=> 1, 's_artist_rating'=>'desc', 'apikey' => env('MUSICXMATCH_TOKEN')]);
 
         return "{$this->api_url}/track.search?{$query}";
     }
