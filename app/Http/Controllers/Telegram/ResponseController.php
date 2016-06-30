@@ -26,22 +26,27 @@ class ResponseController extends AbstractTelegramController
             'text' => "This bot was powered by Musicxmatch",
         ]);
 
-        $tracks = $this->musicxmatch->find($text);
-
-        $message = $this->prepareMessage($chat, $tracks);
-
         return $this->telegram
                     ->setAsyncRequest(true)
-                    ->sendMessage($message);
+                    ->sendMessage($this->prepareMessage($chat, $text));
     }
 
-    protected function prepareMessage($chat, $tracks)
+    protected function prepareMessage($chat, $text)
     {
-        $message = [
-            'chat_id' => $chat->getId(),
-            'text' => "There are {$tracks->count()} results.",
-            'reply_markup' => $this->prepareReplyMarkup($tracks),
-        ];
+        if ((strpos($text, 'id:') == 0) {
+            $track_id = 15953433;
+            $message = [
+                'chat_id' => $chat->getId(),
+                'text' => $this->musicxmatch->getLyric($track_id),
+            ];
+        } else {
+            $tracks = $this->musicxmatch->find($text);
+            $message = [
+                'chat_id' => $chat->getId(),
+                'text' => "There are {$tracks->count()} results.",
+                'reply_markup' => $this->prepareReplyMarkup($tracks),
+            ];
+        }
 
         return $message;
     }
