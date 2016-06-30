@@ -33,7 +33,7 @@ class ResponseController extends AbstractTelegramController
 
     protected function prepareMessage($chat, $text)
     {
-        if (strpos($text, 'id:') == 0) {
+        if (strpos($text, 'id:') === 0) {
             $track_id = '15953433';
             $message = [
                 'chat_id' => $chat->getId(),

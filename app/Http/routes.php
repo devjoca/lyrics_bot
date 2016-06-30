@@ -15,6 +15,7 @@ $app->get('/', 'Telegram\BotInfoController@index');
 $app->get('/set-webhook', 'Telegram\WebhookController@create');
 $app->get('/test', function () {
     $musicxmatch = new App\LyricsFinder\MusicxmatchProvider;
+    dd(strpos('recover', 'id:') === 0);
     return $musicxmatch->getLyric('15953433');
 });
 $app->post('/webhook', 'Telegram\ResponseController@create');
