@@ -16,8 +16,11 @@ class ResponseController extends AbstractTelegramController
 
     public function create()
     {
-        $update = $this->telegram->getWebhookUpdates();
+        $update = $this->telegram->getWebhookUpdates();dd($update);
         $message = $update->getMessage();
+
+        if (is_null($message)) return;
+
         $chat = $message->getChat();
         $text = $message->getText();
 
