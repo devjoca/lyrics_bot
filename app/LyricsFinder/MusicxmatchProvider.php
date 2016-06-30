@@ -34,11 +34,13 @@ class MusicxmatchProvider
     public function getLyric($track_id)
     {
         try {
-            $response = $this->http_client->get($this->getFindTracksUrl($search_text));
+            $response = $this->http_client->get($this->getLyricGetUrl($track_id));
         } catch (Exception $e) {
             return;
         }
         $body = json_decode($response->getBody(), true);
+
+        if (! isset($body['message']['body']['lyrics'])) return '';
 
         return $body['message']['body']['lyrics']['lyrics_body'];
     }
@@ -47,7 +49,7 @@ class MusicxmatchProvider
     {
         $query = http_build_query(['track_id' => $track_id, 'apikey' => env('MUSICXMATCH_TOKEN')]);
 
-        return "{$this->api_url}/track.lyrics?{$query}";
+        return "{$this->api_url}/track.lyrics.get?{$query}";
     }
 
     protected function getFindTracksUrl($search_text)

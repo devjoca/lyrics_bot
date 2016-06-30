@@ -15,6 +15,6 @@ $app->get('/', 'Telegram\BotInfoController@index');
 $app->get('/set-webhook', 'Telegram\WebhookController@create');
 $app->get('/test', function () {
     $musicxmatch = new App\LyricsFinder\MusicxmatchProvider;
-    return $musicxmatch->find('morning glory');
+    return $musicxmatch->getLyric('15953433');
 });
 $app->post('/webhook', 'Telegram\ResponseController@create');
