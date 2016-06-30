@@ -23,7 +23,7 @@ class ResponseController extends AbstractTelegramController
 
         $this->telegram->setAsyncRequest(true)->sendMessage([
             'chat_id' => $chat->getId(),
-            'text' => "Message was: ".$text,
+            'text' => "This bot was powered by Musicxmatch",
         ]);
 
         $tracks = $this->musicxmatch->find($text);
